@@ -18,12 +18,14 @@ public class MicroServer {
         port(port);
 
         // serve the static files: index.html and bundle.js
-        Spark.staticFileLocation(this.path);
+        Spark.staticFiles.location(this.path);
 
-        get("/", (req, res) -> {res.redirect("index.html"); return null;});
-
+//        get("/", (req, res) -> {res.redirect("index.js"); return null;});
+        redirect.get("/", "index.html");
         // register all micro-services and the function that services them.
         // start with HTTP GET
+        get("/hello", (req, res) -> "Hello World");
+
         get("/about", this::about);
 
 //        get("/echo", this::echo);
